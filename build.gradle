@@ -1,0 +1,45 @@
+plugins {
+    id 'groovy'
+    id 'groovy-gradle-plugin'
+    id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '0.14.0'
+}
+
+group 'com.testvagrant.ekam'
+version '0.0.1-alpha'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation('io.cucumber:cucumber-java:6.10.4')
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation gradleTestKit()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+pluginBundle {
+    website = 'https://ekam.testvagrant.ai/'
+    vcsUrl = 'https://github.com/testvagrant/ekam-gradle-plugin'
+    tags = ['ekam', 'web', 'mobile', 'api', 'appium', 'selenium']
+}
+
+gradlePlugin {
+    plugins {
+        ekamPlugin {
+            id = 'com.testvagrant.ekam.plugin'
+            displayName = 'Ekam Plugin'
+            description = 'Ekam, a test automation platform, helps you to quickly get started with WEB | MOBILE | API.'
+            implementationClass = 'com.testvagrant.ekam.gradle.plugins.EkamGradlePlugin'
+        }
+    }
+}
